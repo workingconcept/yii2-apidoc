@@ -123,7 +123,19 @@ class ApiController extends BaseController
             $this->stdout(count($context->warnings) . " warnings have been logged to $targetDir/warnings.txt\n", Console::FG_YELLOW, Console::BOLD);
         }
 
+        $this->removeCruft($targetDir);
+
         return 0;
+    }
+
+    private function removeCruft($targetDir)
+    {
+        // unlink($targetDir . '/errors.txt');
+        // unlink($targetDir . '/warnings.txt');
+        array_map('unlink', glob("$targetDir/cache/*"));
+        array_map('unlink', glob("$targetDir/*.html"));
+        array_map('unlink', glob("$targetDir/*.txt"));
+        rmdir($targetDir . '/cache');
     }
 
     /**

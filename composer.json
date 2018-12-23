@@ -1,5 +1,5 @@
 {
-    "name": "yiisoft/yii2-apidoc",
+    "name": "workingconcept/yii2-apidoc",
     "description": "API Documentation generator for the Yii framework 2.0",
     "keywords": ["yii2", "phpdoc", "apidoc", "api", "documentation"],
     "type": "yii2-extension",

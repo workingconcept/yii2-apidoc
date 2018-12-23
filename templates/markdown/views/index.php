@@ -6,12 +6,18 @@ use yii\apidoc\models\TraitDoc;
 
 /* @var $types ClassDoc[]|InterfaceDoc[]|TraitDoc[] */
 /* @var $this yii\web\View */
+/* @var $renderer \yii\apidoc\templates\html\ApiRenderer */
 
-ksort($types);
+$renderer = $this->context;
+
+if (isset($readme)) {
+    echo \yii\apidoc\helpers\ApiMarkdown::process($readme);
+}
 ?>
-<h1>Class Reference</h1>
 
-<table class="summaryTable docIndex">
+# Class Reference
+
+<table>
     <colgroup>
         <col class="col-package" />
         <col class="col-class" />
@@ -21,9 +27,12 @@ ksort($types);
         <th>Class</th>
         <th>Description</th>
     </tr>
-<?php foreach ($types as $i => $class): ?>
+<?php
+ksort($types);
+foreach ($types as $i => $class):
+?>
     <tr>
-        <td><?= $this->context->createTypeLink($class, $class, $class->name) ?></td>
+        <td><?= $renderer->createTypeLink($class, $class, $class->name) ?></td>
         <td><?= \yii\apidoc\helpers\ApiMarkdown::process($class->shortDescription, $class, true) ?></td>
     </tr>
 <?php endforeach; ?>
